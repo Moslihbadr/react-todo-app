@@ -5,9 +5,30 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #212529;
+  color: #EEE;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+input.task-todo {
+  background-color: transparent;
+}
+
+input.task-todo:focus {
+  background-color: transparent;
+  color: #EEE;
+}
+
+input.task-todo::placeholder {
+  color: #EEE;
+  opacity: .8;
+}
+
+.card {
+  margin: 0 auto;
+}
+
+li.list-group-item {
+  background-color: #212529;
+  color: #EEE;
+  cursor: pointer;
 }
