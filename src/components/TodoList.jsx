@@ -1,13 +1,10 @@
 import TodoItem from "./TodoItem";
 
-const TodoList = () => {
+const TodoList = ({ tasks }) => {
   return (
-    <div className="card" style={{width: '18rem'}}>
+    <div className="card" style={{width: '25rem'}}>
       <ul className="list-group list-group-flush">
-        <TodoItem />
-        <TodoItem />
-        <TodoItem />
-        <TodoItem />
+        {tasks.map(task => <TodoItem key={task.id} task={task} />)}
       </ul>
     </div>
   )
