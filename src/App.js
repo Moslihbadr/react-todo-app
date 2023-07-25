@@ -1,11 +1,25 @@
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const App = () => {
 
-  const [ tasksList, setTasksList ] = useState([])
-  const [ showWarning, setshowWarning ] = useState(true)
+  const [tasksList, setTasksList] = useState(() => {
+    const tasks = localStorage.getItem('tasks');
+    if (tasks === null) return [];
+    try {
+      return JSON.parse(tasks);
+    } catch (error) {
+      console.error('Error parsing tasks from localStorage:', error);
+      return [];
+    }
+  });
+
+  const [showWarning, setShowWarning] = useState(() => {
+    const warning = localStorage.getItem('showWarning');
+    if (warning === null) return true;
+    return JSON.parse(warning);
+  });
 
   const addTask = (text) => {
     setTasksList(prevTaskList => ([...prevTaskList, {id: crypto.randomUUID(), text: text, completed: false}]))
@@ -25,12 +39,21 @@ const App = () => {
     );
   }
 
+  useEffect(() => {
+      localStorage.setItem('tasks', JSON.stringify(tasksList))
+  }, [tasksList])
+
+  useEffect(() => {
+    localStorage.setItem('showWarning', JSON.stringify(showWarning));
+  }, [showWarning]);
+
+
   return (
     <div className='container p-2 text-center'>
       {showWarning && 
-      <div class="alert alert-warning alert-dismissible fade show"> 
+      <div className="alert alert-warning alert-dismissible fade show"> 
         <strong>Heads up:</strong> Double-click on the task to mark it as completed. 
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setshowWarning(false)}></button>
+        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setShowWarning(false)}></button>
       </div>}
       <h1 className='m-3 mb-5'>Todo App</h1>
       <TodoForm addTask={addTask} />
