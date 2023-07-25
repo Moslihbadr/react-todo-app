@@ -6,31 +6,42 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #212529;
-  color: #EEE;
 }
 
-input.task-todo {
-  background-color: transparent;
-  color: #EEE;
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
 }
 
+input.task-todo, 
 input.task-todo:focus {
   background-color: transparent;
-  color: #EEE;
+  color: #797979;
 }
 
 input.task-todo::placeholder {
-  color: #EEE;
-  opacity: .8;
+  color: #656464;
 }
 
 .card {
   margin: 0 auto;
+  max-width: 700px;
 }
 
 li.list-group-item {
-  background-color: #212529;
-  color: #EEE;
   cursor: pointer;
+}
+
+.toggleBar {
+  cursor: pointer;
+}
+
+.dark {
+  background-color: #212529;
+  color: #FFFFFF;
+}
+
+.light {
+  background-color: #FFFFFF;
+  color: #212529;
 }

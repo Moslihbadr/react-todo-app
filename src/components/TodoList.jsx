@@ -1,10 +1,10 @@
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ tasks, onTaskClick, onTaskDelete }) => {
+const TodoList = ({ tasks, darkMode, onTaskClick, onTaskDelete }) => {
   return (
-    <div className="card" style={{width: '22rem'}}>
+    <div className="card">
       <ul className="list-group list-group-flush">
-        {tasks.map(task => <TodoItem key={task.id} task={task} onTaskClick={onTaskClick} onTaskDelete={onTaskDelete}/>)}
+        {tasks.map(task => <TodoItem key={task.id} task={task}  darkMode={darkMode} onTaskClick={onTaskClick} onTaskDelete={onTaskDelete}/>)}
       </ul>
     </div>
   )

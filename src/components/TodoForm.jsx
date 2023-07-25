@@ -1,14 +1,21 @@
 import { useState } from "react";
 
-const TodoForm = ({ addTask }) => {
+
+  const TodoForm = ({ addTask }) => {
+  
+  // newTask state
   const [ newTask, setNewTask ] = useState('')
 
+
+  // function for handling form submit
   const handleSubmit = (e) => {
     e.preventDefault();
     newTask ? addTask(newTask): alert('Task is required');
     setNewTask('');
   }
-
+  
+  
+  // function for handling input change
   const handleChange = (e) => {
     setNewTask(e.target.value.trimStart())
   }
