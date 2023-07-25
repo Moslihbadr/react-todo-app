@@ -5,6 +5,7 @@ import { useState } from 'react';
 const App = () => {
 
   const [ tasksList, setTasksList ] = useState([])
+  const [ showWarning, setshowWarning ] = useState(true)
 
   const addTask = (text) => {
     setTasksList(prevTaskList => ([...prevTaskList, {id: crypto.randomUUID(), text: text, completed: false}]))
@@ -18,11 +19,23 @@ const App = () => {
     );
   }
 
+  const handleTaskDelete = (id) => {
+    setTasksList(prevTasks =>
+      prevTasks.filter(task => task.id !== id)
+    );
+  }
+
   return (
     <div className='container p-2 text-center'>
+      {showWarning && 
+      <div class="alert alert-warning alert-dismissible fade show"> 
+        <strong>Heads up:</strong> Double-click on the task to mark it as completed. 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => setshowWarning(false)}></button>
+      </div>}
       <h1 className='m-3 mb-5'>Todo App</h1>
       <TodoForm addTask={addTask} />
-      <TodoList tasks={tasksList} onTaskClick={handleTaskClick} />
+      {tasksList.length === 0 && <h1>No Tasks</h1>}
+      <TodoList tasks={tasksList} onTaskClick={handleTaskClick} onTaskDelete={handleTaskDelete} />
     </div>
   );
 }
